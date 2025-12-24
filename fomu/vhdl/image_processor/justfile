@@ -1,0 +1,83 @@
+default: c b f
+
+# build the bitstream
+b: _json _asc _bit _dfu
+
+_json:
+  #!/bin/sh
+
+  VHDL_FILES=$(find hw -maxdepth 1 -type f -iname '*.vhd' | tr '\n' ' ')
+  VERILOG_FILES=$(find ../../usb_cdc/usb_cdc -type f -iname '*.v' | tr '\n' ' ')
+
+  yosys \
+    -m ghdl \
+    -l build/yosys.log \
+    -p "ghdl \
+      --std=08 \
+      $VHDL_FILES \
+      -e Main; \
+      read_verilog \
+        ../../usb_cdc/examples/common/hdl/ice40/ram.v \
+        ../../usb_cdc/examples/common/hdl/ice40/rom.v \
+        ../../usb_cdc/examples/common/hdl/ice40/SB_RAM256x16.v \
+        ../../usb_cdc/examples/common/hdl/prescaler.v \
+        $VERILOG_FILES; \
+      synth_ice40 \
+      -json build/main.json" \
+
+_asc:
+  nextpnr-ice40 \
+    --up5k --package uwg30 \
+    --pcf ../../fomu.pcf \
+    --json build/main.json \
+    --asc build/main.asc
+
+_bit:
+  icepack build/main.asc > build/main.bit
+
+_dfu:
+  cp build/main.bit build/main.dfu
+  dfu-suffix -v 1209 -p 70b1 -a build/main.dfu
+
+# test module
+t MODULE TIME="100ns" FILE="hw/test.vhd":
+  #!/bin/sh
+
+  nvc \
+    -a {{FILE}} \
+    -e {{MODULE}} \
+    -r \
+    --stop-time={{TIME}} \
+    --format=vcd \
+    --wave=build/test_{{MODULE}}.vcd
+
+  if pgrep surfer > /dev/null
+  then
+    echo "surfer is already running"
+  else
+    sleep 1
+    nixGLMesa surfer build/test_{{MODULE}}.vcd &
+    sleep 1
+    echo -e "\n"
+  fi
+
+# clean build
+c:
+  rm -rf build/*
+  rm -f ./*.cf ./*.log
+
+# flash bitstream
+f:
+  sudo dfu-util -D build/main.dfu
+
+# list available hardware
+l:
+  sudo dfu-util -l
+
+# run software
+r:
+  cargo run
+
+# echo things
+e:
+  echo -e "\x43\r" > /dev/ttyACM0

@@ -1,0 +1,10 @@
+.direnv/
+.ghdl/
+build/
+target/
+work/
+
+*.log
+*.cf
+*.fst
+*.bkp

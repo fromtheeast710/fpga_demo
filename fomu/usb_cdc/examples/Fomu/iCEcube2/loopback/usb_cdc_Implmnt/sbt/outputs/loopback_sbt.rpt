@@ -1,0 +1,123 @@
+* ******************************************************************************
+
+* iCEcube Report
+
+* Version:            2020.12.27943
+
+* Build Date:         Dec 10 2020 17:24:17
+
+* File Generated:     Mar 10 2024 17:41:39
+
+* Purpose:            General info of design implementation
+
+* Copyright (C) 2006-2010 by Lattice Semiconductor Corp. All rights reserved.
+
+* ******************************************************************************
+
+Synthesis/Placement Summary:
+----------------------------
+    Status:  Successful
+    Runtime: 1 seconds
+
+Device Info:
+------------
+    Device Family: iCE40UP
+    Device:        iCE40UP5K
+    Package:       UWG30
+
+Design statistics:
+------------------
+    FFs:                  456
+    LUTs:                 1260
+    RAMs:                 0
+    IOBs:                 4
+    GBs:                  6
+    PLLs:                 0
+    Warm Boots:           0
+    SPIs:                 0
+    I2Cs:                 0
+    HFOSCs:               0
+    LFOSCs:               0
+    RGBA_DRVs:            1
+    LEDDA_IPs:            0
+    DSPs:                 0
+    SPRAMs:               0
+    FILTER_50NSs:         0
+
+Logic Resource Utilization:
+---------------------------
+    Total Logic Cells: 1260/5280
+        Combinational Logic Cells: 804      out of   5280      15.2273%
+        Sequential Logic Cells:    456      out of   5280      8.63636%
+        Logic Tiles:               225      out of   660       34.0909%
+    Registers: 
+        Logic Registers:           456      out of   5280      8.63636%
+        IO Registers:              0        out of   480       0
+    Block RAMs:                    0        out of   30        0%
+    Warm Boots:                    0        out of   1         0%
+    SPIs:                          0        out of   2         0%
+    I2Cs:                          0        out of   2         0%
+    HFOSCs:                        0        out of   1         0%
+    LFOSCs:                        0        out of   1         0%
+    RGBA_DRVs:                     1        out of   1         100%
+    LEDDA_IPs:                     0        out of   1         0%
+    DSPs:                          0        out of   8         0%
+    SPRAMs:                        0        out of   4         0%
+    FILTER_50NSs:                  0        out of   2         0%
+    Pins:
+        Input Pins:                1        out of   21        4.7619%
+        Output Pins:               1        out of   21        4.7619%
+        InOut Pins:                2        out of   21        9.52381%
+    Global Buffers:                6        out of   8         75%
+    PLLs:                          0        out of   1         0%
+
+IO Bank Utilization:
+--------------------
+    Bank 3: 0        out of   0         0%
+    Bank 1: 0        out of   0         0%
+    Bank 0: 3        out of   7         42.8571%
+    Bank 2: 1        out of   14        7.14286%
+
+Detailed I/O Info:
+------------------
+    Input Pins: 
+    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function                                Signal Name
+    ----------  ---------  -----------  -------  -------  -----------                                -----------
+    F4          Input      SB_LVCMOS    No       2        Simple Input                               clki       
+
+    Output Pins: 
+    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function                                Signal Name
+    ----------  ---------  -----------  -------  -------  -----------                                -----------
+    A4          Output     SB_LVCMOS    No       0        Output Tristatable by Enable               usb_dp_pu  
+
+    Inoutput Pins: 
+    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function                                Signal Name
+    ----------  ---------  -----------  -------  -------  -----------                                -----------
+    A1          InOut      SB_LVCMOS    No       0        Simple Input Output Tristatable by Enable  usb_dp     
+    A2          InOut      SB_LVCMOS    No       0        Simple Input Output Tristatable by Enable  usb_dn     
+
+Detailed Global Buffer Info:
+----------------------------
+    Buffer Number  IO Bank  Driven By  Fanout  Signal Name                                              
+    -------------  -------  ---------  ------  -----------                                              
+    5              2                   40      u_usb_cdc.u_sie.in_zlp_q_0_sqmuxa_g                      
+    6              2                   365     u_usb_cdc.bus_reset_g                                    
+    4              0                   20      u_usb_cdc.u_bulk_endps_0__u_bulk_endp.app_rstn_sq_i_g_0  
+    3              0                   94      u_usb_cdc.clk_gate_q_g                                   
+    7              2                   434     clk                                                      
+    1              0                   23      clk_12mhz_g                                              
+
+
+Router Summary:
+---------------
+    Status:  Successful
+    Runtime: 11 seconds
+
+Routing Resource Utilization:
+-----------------------------
+              Local line of tile     8870 out of 110555      8.02316%
+                          Span 4     2085 out of  23008      9.06207%
+                         Span 12      258 out of   4464      5.77957%
+                  Global network        6 out of      8      75%
+      Vertical Inter-LUT Connect      314 out of   4620      6.79654%
+
